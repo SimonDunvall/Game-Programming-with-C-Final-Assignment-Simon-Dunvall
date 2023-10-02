@@ -29,15 +29,15 @@ namespace Resources
 
         private static void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
         {
-            if (scene.name == "MainMenu")
+            if (scene.name == "Track01")
             {
-                Debug.Log("Game Started. MainMenu scene loaded");
+                Debug.Log("Game Started. Track01 scene loaded");
             }
         }
 
         private static void LoadTrack()
         {
-            SceneManager.LoadSceneAsync("MainMenu");
+            SceneManager.LoadSceneAsync("Track01");
         }
 
         private static void LogGameState(string message)
