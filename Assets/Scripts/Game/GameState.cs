@@ -66,11 +66,13 @@ namespace Game
         public static void pauseGame()
         {
             gameSettings.isGamePaused = true;
+            Time.timeScale = 0;
         }
 
         public static void unPauseGame()
         {
             gameSettings.isGamePaused = false;
+            Time.timeScale = 1;
         }
 
         public static bool isGamePaused()
