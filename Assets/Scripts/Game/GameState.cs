@@ -7,7 +7,7 @@ namespace Game
     public class GameState : MonoBehaviour
     {
         private static GameState instance;
-        private GameSettings gameSettings;
+        private static GameSettings gameSettings;
 
         public void Initialize()
         {
@@ -31,7 +31,8 @@ namespace Game
         private void LoadPauseMenu()
         {
             var pauseMenuPrefab = Resources.Load<PauseMenuController>("PauseMenuCanvas");
-            Instantiate(pauseMenuPrefab);
+            var pauseMenuController = Instantiate(pauseMenuPrefab);
+            pauseMenuController.Initialize();
         }
 
         private void Awake()
@@ -60,6 +61,21 @@ namespace Game
         private void LogGameState(string message)
         {
             Debug.Log(message);
+        }
+
+        public static void pauseGame()
+        {
+            gameSettings.isGamePaused = true;
+        }
+
+        public static void unPauseGame()
+        {
+            gameSettings.isGamePaused = false;
+        }
+
+        public static bool isGamePaused()
+        {
+            return gameSettings.isGamePaused;
         }
     }
 }

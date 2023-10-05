@@ -1,3 +1,4 @@
+using Game;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,7 @@ namespace Menus
     {
         private static PauseMenuController instance;
 
-        private void Initialize()
+        public void Initialize()
         {
             if (instance == null)
             {
@@ -25,7 +26,6 @@ namespace Menus
 
         private void Awake()
         {
-            Initialize();
             pauseMenuActionMap = primaryActions.FindActionMap("PauseMenu");
 
             pauseMenuInputAction = pauseMenuActionMap.FindAction("Pause Game");
@@ -45,7 +45,17 @@ namespace Menus
 
         private void PauseGame(InputAction.CallbackContext context)
         {
-            Debug.Log("paused");
+            var canvas = instance.GetComponent<Canvas>();
+            if (!GameState.isGamePaused())
+            {
+                GameState.pauseGame();
+                canvas.enabled = true;
+            }
+            else
+            {
+                GameState.unPauseGame();
+                canvas.enabled = false;
+            }
         }
     }
 }
