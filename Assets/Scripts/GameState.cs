@@ -16,12 +16,19 @@ public class GameState : MonoBehaviour
 
             LoadSettings();
             LoadTrack();
+            LoadPauseMenu();
 
             return;
         }
 
         LogGameState("Duplicate instance instantiated, destroying...");
         Destroy(gameObject);
+    }
+
+    private void LoadPauseMenu()
+    {
+        var pauseMenuPrefab = Resources.Load<PauseMenuController>("PauseMenuCanvas");
+        Instantiate(pauseMenuPrefab);
     }
 
     private void Awake()
@@ -47,7 +54,7 @@ public class GameState : MonoBehaviour
         SceneManager.LoadSceneAsync(gameSettings.tracksName[0], LoadSceneMode.Single);
     }
 
-    private static void LogGameState(string message)
+    private void LogGameState(string message)
     {
         Debug.Log(message);
     }

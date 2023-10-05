@@ -44,6 +44,5 @@ public class PauseMenuController : MonoBehaviour
     private void PauseGame(InputAction.CallbackContext context)
     {
         Debug.Log("paused");
-        Debug.Log(this.GetInstanceID());
     }
 }
