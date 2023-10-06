@@ -79,5 +79,10 @@ namespace Game
         {
             return gameSettings.isGamePaused;
         }
+
+        public static int getNumberOfLaps()
+        {
+            return gameSettings.numberOfLaps;
+        }
     }
 }

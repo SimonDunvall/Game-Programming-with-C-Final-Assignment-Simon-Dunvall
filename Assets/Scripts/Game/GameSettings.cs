@@ -10,5 +10,6 @@ namespace Game
         public List<string> tracksName;
 
         [Header("Other Settings")] public bool isGamePaused;
+        public int numberOfLaps;
     }
 }
