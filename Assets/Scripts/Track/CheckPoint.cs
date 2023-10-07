@@ -5,11 +5,14 @@ namespace Track
 {
     public class CheckPoint : MonoBehaviour
     {
-        public bool checkPointDone;
+        public List<int> carsPassed = new List<int>();
 
         private void OnTriggerEnter(Collider checkPointCollider)
         {
-            checkPointDone = true;
+            if (!carsPassed.Contains(checkPointCollider.GetInstanceID()))
+            {
+                carsPassed.Add(checkPointCollider.GetInstanceID());
+            }
         }
     }
 }

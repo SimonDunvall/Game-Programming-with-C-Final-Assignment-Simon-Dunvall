@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Car;
 using Game;
 using UnityEngine;
 
@@ -7,31 +8,27 @@ namespace Track
 {
     public class FinishLine : MonoBehaviour
     {
-        public int NumberOfLapsCompleted;
-
         private void OnTriggerEnter(Collider carCollider)
         {
             var checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
-            List<bool> doneCheckPoints = new List<bool>();
+            List<bool> doneCheckPoints = (from checkPoint in checkPoints
+                select checkPoint.GetComponent<CheckPoint>()
+                into cp
+                where cp.carsPassed.Contains(carCollider.GetInstanceID())
+                select true).ToList();
 
-            foreach (var checkPoint in checkPoints)
+            if (doneCheckPoints.Count() != checkPoints.Count() || !doneCheckPoints.TrueForAll(e => e)) return;
             {
-                var cp = checkPoint.GetComponent<CheckPoint>();
-                doneCheckPoints.Add(cp.checkPointDone);
-            }
-
-            if (doneCheckPoints.Count() == checkPoints.Count() && doneCheckPoints.TrueForAll(e => e))
-            {
-                NumberOfLapsCompleted++;
+                var car = carCollider.GetComponentInParent<CarManager>();
+                car.NumberOfLapsCompleted++;
 
                 foreach (var checkPoint in checkPoints)
                 {
                     var cp = checkPoint.GetComponent<CheckPoint>();
-                    cp.checkPointDone = false;
+                    cp.carsPassed.Remove(carCollider.GetInstanceID());
                 }
 
-
-                if (GameState.getNumberOfLaps() <= NumberOfLapsCompleted)
+                if (GameState.getNumberOfLaps() <= car.NumberOfLapsCompleted)
                 {
                     Debug.Log($"{carCollider.transform.parent.name} Won");
                 }
