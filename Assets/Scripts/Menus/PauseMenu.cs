@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 
 namespace Menus
 {
-    public class PauseMenuController : MonoBehaviour
+    public class PauseMenu : MonoBehaviour
     {
-        private static PauseMenuController instance;
+        private static PauseMenu instance;
 
         public void Initialize()
         {

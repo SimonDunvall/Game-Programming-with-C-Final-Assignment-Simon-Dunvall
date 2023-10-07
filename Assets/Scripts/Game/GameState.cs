@@ -15,10 +15,9 @@ namespace Game
             {
                 instance = this;
                 DontDestroyOnLoad(gameObject);
-                LogGameState("Game Initialized");
 
                 LoadSettings();
-                LoadTrack();
+                LoadMainMenu();
                 LoadPauseMenu();
 
                 return;
@@ -28,16 +27,16 @@ namespace Game
             Destroy(gameObject);
         }
 
-        private void LoadPauseMenu()
+        private void LoadMainMenu()
         {
-            var pauseMenuPrefab = Resources.Load<PauseMenuController>("pauseMenuCanvas");
-            var pauseMenuController = Instantiate(pauseMenuPrefab);
-            pauseMenuController.Initialize();
+            SceneManager.LoadSceneAsync(gameSettings.mainMenuSceneName, LoadSceneMode.Single);
         }
 
-        private void Awake()
+        private void LoadPauseMenu()
         {
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            var pauseMenuPrefab = Resources.Load<PauseMenu>("pauseMenuCanvas");
+            var pauseMenuController = Instantiate(pauseMenuPrefab);
+            pauseMenuController.Initialize();
         }
 
         private void LoadSettings()
@@ -45,15 +44,7 @@ namespace Game
             gameSettings = Resources.Load<GameSettings>("GameSettings");
         }
 
-        private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
-        {
-            if (scene.name == gameSettings.tracksName[0])
-            {
-                Debug.Log("Game Started. Track01 scene loaded");
-            }
-        }
-
-        private void LoadTrack()
+        public static void LoadTrack()
         {
             SceneManager.LoadSceneAsync(gameSettings.tracksName[0], LoadSceneMode.Single);
         }
