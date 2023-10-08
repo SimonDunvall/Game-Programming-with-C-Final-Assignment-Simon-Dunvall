@@ -1,61 +1,22 @@
 using Game;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Menus
 {
     public class PauseMenu : MonoBehaviour
     {
-        private static PauseMenu instance;
-
-        public void Initialize()
+        public void MainMenu()
         {
-            if (instance == null)
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-                return;
-            }
-
-            Destroy(gameObject);
+            var canvas = gameObject.GetComponentInParent<Canvas>();
+            canvas.enabled = false;
+            GameState.LoadMainMenu();
         }
 
-        public InputActionAsset primaryActions;
-        private InputActionMap pauseMenuActionMap;
-        private InputAction pauseMenuInputAction;
-
-        private void Awake()
+        public void ResumeGame()
         {
-            pauseMenuActionMap = primaryActions.FindActionMap("PauseMenu");
-
-            pauseMenuInputAction = pauseMenuActionMap.FindAction("Pause Game");
-
-            pauseMenuInputAction.performed += PauseGame;
-        }
-
-        private void OnEnable()
-        {
-            pauseMenuInputAction?.Enable();
-        }
-
-        private void OnDisable()
-        {
-            pauseMenuInputAction?.Disable();
-        }
-
-        private void PauseGame(InputAction.CallbackContext context)
-        {
-            var canvas = instance.GetComponent<Canvas>();
-            if (!GameState.isGamePaused())
-            {
-                GameState.pauseGame();
-                canvas.enabled = true;
-            }
-            else
-            {
-                GameState.unPauseGame();
-                canvas.enabled = false;
-            }
+            GameState.unPauseGame();
+            var canvas = gameObject.GetComponentInParent<Canvas>();
+            canvas.enabled = false;
         }
     }
 }

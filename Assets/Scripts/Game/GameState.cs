@@ -9,16 +9,16 @@ namespace Game
         private static GameState instance;
         private static GameSettings gameSettings;
 
-        public void Initialize()
+        public void Initialize(GameSettings settings)
         {
             if (instance == null)
             {
                 instance = this;
                 DontDestroyOnLoad(gameObject);
 
-                LoadSettings();
+                gameSettings = settings;
+
                 LoadMainMenu();
-                LoadPauseMenu();
 
                 return;
             }
@@ -27,22 +27,17 @@ namespace Game
             Destroy(gameObject);
         }
 
-        private void LoadMainMenu()
+        public static void LoadMainMenu()
         {
             SceneManager.LoadSceneAsync(gameSettings.mainMenuSceneName, LoadSceneMode.Single);
         }
 
-        private void LoadPauseMenu()
+        public static void LoadPauseMenu()
         {
-            var pauseMenuPrefab = Resources.Load<PauseMenu>("pauseMenuCanvas");
-            var pauseMenuController = Instantiate(pauseMenuPrefab);
-            pauseMenuController.Initialize();
+            var pauseMenuPrefab = Resources.Load<PauseMenuController>("pauseMenuCanvas");
+            Instantiate(pauseMenuPrefab);
         }
 
-        private void LoadSettings()
-        {
-            gameSettings = Resources.Load<GameSettings>("GameSettings");
-        }
 
         public static void LoadTrack()
         {
