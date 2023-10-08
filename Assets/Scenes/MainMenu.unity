@@ -266,7 +266,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 397097096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ee60fa595bdb4186910c575c2302d79, type: 3}
+  m_Script: {fileID: 11500000, guid: 5397d36c7676e429ab0b973fe578a3da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &465452887
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 465452892}
   - component: {fileID: 465452891}
   - component: {fileID: 465452890}
-  - component: {fileID: 465452889}
+  - component: {fileID: 465452893}
   m_Layer: 5
   m_Name: QuitGameButton
   m_TagString: Untagged
@@ -309,18 +309,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &465452889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 465452887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ee60fa595bdb4186910c575c2302d79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &465452890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,7 +353,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 465452889}
+      - m_Target: {fileID: 465452893}
         m_TargetAssemblyTypeName: Menus.MainMenu, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
@@ -415,6 +403,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465452887}
   m_CullTransparentMesh: 1
+--- !u!114 &465452893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465452887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5397d36c7676e429ab0b973fe578a3da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &860841484
 GameObject:
   m_ObjectHideFlags: 0

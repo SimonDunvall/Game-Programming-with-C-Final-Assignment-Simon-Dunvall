@@ -11,5 +11,10 @@ namespace Game
 
         [Header("Other Settings")] public bool isGamePaused;
         public int numberOfLaps;
+
+        public void SetDefaultValues()
+        {
+            isGamePaused = false;
+        }
     }
 }

@@ -1,19 +1,23 @@
 using Game;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace Menus
 {
     public class PauseMenuController : MonoBehaviour
     {
         private static PauseMenuController instance;
+        private static GameSettings gameSettings;
 
-        private void Initialize()
+        internal void Initialize(GameSettings settings)
         {
             if (instance == null)
             {
                 instance = this;
                 DontDestroyOnLoad(gameObject);
+
+                gameSettings = settings;
                 return;
             }
 
@@ -26,7 +30,6 @@ namespace Menus
 
         private void Awake()
         {
-            Initialize();
             pauseMenuActionMap = primaryActions.FindActionMap("PauseMenu");
 
             pauseMenuInputAction = pauseMenuActionMap.FindAction("Pause Game");
@@ -46,16 +49,15 @@ namespace Menus
 
         private void PauseGame(InputAction.CallbackContext context)
         {
+            if (SceneManager.GetActiveScene().name == gameSettings.mainMenuSceneName) return;
             var canvas = instance.GetComponent<Canvas>();
-            if (!GameState.isGamePaused())
+            if (!gameSettings.isGamePaused)
             {
-                GameState.pauseGame();
-                canvas.enabled = true;
+                GameState.pauseGame(canvas);
             }
             else
             {
-                GameState.unPauseGame();
-                canvas.enabled = false;
+                GameState.unPauseGame(canvas);
             }
         }
     }

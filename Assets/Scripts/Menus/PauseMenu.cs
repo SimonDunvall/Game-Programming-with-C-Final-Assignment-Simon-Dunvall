@@ -8,15 +8,14 @@ namespace Menus
         public void MainMenu()
         {
             var canvas = gameObject.GetComponentInParent<Canvas>();
-            canvas.enabled = false;
+            GameState.unPauseGame(canvas);
             GameState.LoadMainMenu();
         }
 
         public void ResumeGame()
         {
-            GameState.unPauseGame();
             var canvas = gameObject.GetComponentInParent<Canvas>();
-            canvas.enabled = false;
+            GameState.unPauseGame(canvas);
         }
     }
 }

@@ -17,53 +17,44 @@ namespace Game
                 DontDestroyOnLoad(gameObject);
 
                 gameSettings = settings;
-
                 LoadMainMenu();
+                LoadPauseMenu();
 
                 return;
             }
 
-            LogGameState("Duplicate instance instantiated, destroying...");
             Destroy(gameObject);
         }
 
-        public static void LoadMainMenu()
+        internal static void LoadMainMenu()
         {
             SceneManager.LoadSceneAsync(gameSettings.mainMenuSceneName, LoadSceneMode.Single);
         }
 
-        public static void LoadPauseMenu()
+        private static void LoadPauseMenu()
         {
             var pauseMenuPrefab = Resources.Load<PauseMenuController>("pauseMenuCanvas");
-            Instantiate(pauseMenuPrefab);
+            var pauseMenuController = Instantiate(pauseMenuPrefab);
+            pauseMenuController.Initialize(gameSettings);
         }
 
-
-        public static void LoadTrack()
+        internal static void LoadTrack()
         {
             SceneManager.LoadSceneAsync(gameSettings.tracksName[0], LoadSceneMode.Single);
         }
 
-        private void LogGameState(string message)
-        {
-            Debug.Log(message);
-        }
-
-        public static void pauseGame()
+        public static void pauseGame(Canvas canvas)
         {
             gameSettings.isGamePaused = true;
+            canvas.enabled = true;
             Time.timeScale = 0;
         }
 
-        public static void unPauseGame()
+        public static void unPauseGame(Canvas canvas)
         {
             gameSettings.isGamePaused = false;
+            canvas.enabled = false;
             Time.timeScale = 1;
-        }
-
-        public static bool isGamePaused()
-        {
-            return gameSettings.isGamePaused;
         }
 
         public static int getNumberOfLaps()

@@ -8,7 +8,6 @@ namespace Menus
         public void RunGame()
         {
             GameState.LoadTrack();
-            GameState.LoadPauseMenu();
         }
 
         public void QuitGame()
