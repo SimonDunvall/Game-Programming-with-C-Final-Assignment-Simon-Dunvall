@@ -562,7 +562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 30
-  maxTorque: 50
+  maxTorque: 30
   primaryActions: {fileID: -944628639613478452, guid: 367d0bede3b6f4b26845edeeb5ccccfe, type: 3}
 --- !u!114 &4716470329075380077
 MonoBehaviour:
@@ -576,6 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ee2af4503d7446b981607031d0610c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NumberOfLapsCompleted: 0
 --- !u!1 &3962000127133956386
 GameObject:
   m_ObjectHideFlags: 0

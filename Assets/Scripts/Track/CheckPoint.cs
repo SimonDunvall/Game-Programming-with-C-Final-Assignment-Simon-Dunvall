@@ -7,11 +7,11 @@ namespace Track
     {
         public List<int> carsPassed = new List<int>();
 
-        private void OnTriggerEnter(Collider checkPointCollider)
+        private void OnTriggerEnter(Collider carCollider)
         {
-            if (!carsPassed.Contains(checkPointCollider.GetInstanceID()))
+            if (!carsPassed.Contains(carCollider.GetInstanceID()))
             {
-                carsPassed.Add(checkPointCollider.GetInstanceID());
+                carsPassed.Add(carCollider.GetInstanceID());
             }
         }
     }
