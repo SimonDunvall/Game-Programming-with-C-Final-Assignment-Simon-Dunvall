@@ -4,6 +4,6 @@ namespace Car
 {
     public class CarManager : MonoBehaviour
     {
-        public int NumberOfLapsCompleted;
+        internal int NumberOfLapsCompleted;
     }
 }
