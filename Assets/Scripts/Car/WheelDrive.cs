@@ -5,9 +5,8 @@ namespace Car
 {
     public class WheelDrive : MonoBehaviour
     {
-        public float maxAngle = 30f;
-        public float maxTorque = 300f;
-        private GameObject wheelShape;
+        public float maxAngle;
+        public float maxTorque;
 
         private WheelCollider[] m_Wheels;
 
@@ -21,14 +20,6 @@ namespace Car
         private void Start()
         {
             m_Wheels = GetComponentsInChildren<WheelCollider>();
-
-            foreach (var wheel in m_Wheels)
-            {
-                if (wheelShape != null)
-                {
-                    Instantiate(wheelShape, wheel.transform, true);
-                }
-            }
         }
 
         private void Awake()
@@ -57,27 +48,6 @@ namespace Car
                     case < 0:
                         wheel.motorTorque = torque;
                         break;
-                }
-
-                if (wheel.transform.localPosition.z >= 0)
-                {
-                    wheel.motorTorque = torque;
-                }
-
-                if (!wheelShape) continue;
-                wheel.GetWorldPose(out var p, out var q);
-
-                Transform shapeTransform = wheel.transform.GetChild(0);
-
-                if (wheel.name == "a0l" || wheel.name == "a1l" || wheel.name == "a2l")
-                {
-                    shapeTransform.rotation = q * Quaternion.Euler(0, 180, 0);
-                    shapeTransform.position = p;
-                }
-                else
-                {
-                    shapeTransform.position = p;
-                    shapeTransform.rotation = q;
                 }
             }
         }

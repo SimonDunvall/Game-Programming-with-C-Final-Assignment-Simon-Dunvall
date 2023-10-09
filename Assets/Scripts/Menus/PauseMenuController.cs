@@ -50,7 +50,7 @@ namespace Menus
         private void PauseGame(InputAction.CallbackContext context)
         {
             if (SceneManager.GetActiveScene().name == gameSettings.mainMenuSceneName) return;
-            var canvas = instance.GetComponent<Canvas>();
+            Canvas canvas = instance.GetComponent<Canvas>();
             if (!gameSettings.isGamePaused)
             {
                 GameState.pauseGame(canvas);

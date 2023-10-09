@@ -33,8 +33,8 @@ namespace Game
 
         private static void LoadPauseMenu()
         {
-            var pauseMenuPrefab = Resources.Load<PauseMenuController>("pauseMenuCanvas");
-            var pauseMenuController = Instantiate(pauseMenuPrefab);
+            PauseMenuController pauseMenuPrefab = Resources.Load<PauseMenuController>("pauseMenuCanvas");
+            PauseMenuController pauseMenuController = Instantiate(pauseMenuPrefab);
             pauseMenuController.Initialize(gameSettings);
         }
 

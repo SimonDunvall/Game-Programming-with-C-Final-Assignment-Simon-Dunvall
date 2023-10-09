@@ -10,7 +10,7 @@ namespace Track
     {
         private void OnTriggerEnter(Collider carCollider)
         {
-            var checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
+            GameObject[] checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
             List<bool> doneCheckPoints = (from checkPoint in checkPoints
                 select checkPoint.GetComponent<CheckPoint>()
                 into cp
@@ -19,12 +19,12 @@ namespace Track
 
             if (doneCheckPoints.Count() != checkPoints.Count() || !doneCheckPoints.TrueForAll(e => e)) return;
             {
-                var car = carCollider.GetComponentInParent<CarManager>();
+                CarManager car = carCollider.GetComponentInParent<CarManager>();
                 car.NumberOfLapsCompleted++;
 
-                foreach (var checkPoint in checkPoints)
+                foreach (GameObject checkPoint in checkPoints)
                 {
-                    var cp = checkPoint.GetComponent<CheckPoint>();
+                    CheckPoint cp = checkPoint.GetComponent<CheckPoint>();
                     cp.carsPassed.Remove(carCollider.GetInstanceID());
                 }
 

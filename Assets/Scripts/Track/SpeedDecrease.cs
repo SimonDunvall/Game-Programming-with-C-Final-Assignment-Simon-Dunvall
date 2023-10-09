@@ -10,7 +10,7 @@ namespace Track
 
         private void OnTriggerEnter(Collider carCollider)
         {
-            var attachedRigidbody = carCollider.attachedRigidbody;
+            Rigidbody attachedRigidbody = carCollider.attachedRigidbody;
             originalDrag = attachedRigidbody.drag;
 
             attachedRigidbody.drag = DecreaseDragAmount;

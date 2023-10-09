@@ -21,11 +21,11 @@ namespace Game
 
         private static void LoadGameState()
         {
-            var go = new GameObject
+            GameObject go = new GameObject
             {
                 name = "GameState"
             };
-            var gameState = go.AddComponent<GameState>();
+            GameState gameState = go.AddComponent<GameState>();
             gameState.Initialize(gameSettings);
         }
     }
