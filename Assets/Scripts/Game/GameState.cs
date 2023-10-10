@@ -52,9 +52,9 @@ namespace Game
             pauseMenuController.Initialize(gameSettings);
         }
 
-        internal static void LoadTrack()
+        internal static void LoadTrack(int trackNumber)
         {
-            SceneManager.LoadSceneAsync(gameSettings.tracksName[0], LoadSceneMode.Single);
+            SceneManager.LoadSceneAsync(gameSettings.tracksName[trackNumber], LoadSceneMode.Single);
         }
 
         public static void pauseGame(Canvas canvas)

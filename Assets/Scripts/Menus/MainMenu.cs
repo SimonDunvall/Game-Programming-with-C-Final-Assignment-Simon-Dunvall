@@ -1,5 +1,4 @@
 using System;
-using Game;
 using UnityEngine;
 
 namespace Menus
@@ -8,8 +7,8 @@ namespace Menus
     {
         public void RunGame()
         {
-            GameState.LoadTrack();
-            //GameState.LoadCars();
+            gameObject.GetComponentInParent<Canvas>().enabled = false;
+            FindFirstObjectByType<TrackMenu>().gameObject.GetComponentInParent<Canvas>().enabled = true;
         }
 
         public void Settings()
