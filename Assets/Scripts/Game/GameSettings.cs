@@ -11,6 +11,7 @@ namespace Game
 
         [Header("Other Settings")] public bool isGamePaused;
         public int numberOfLaps;
+        public int cameraChoose;
 
         public void SetDefaultValues()
         {

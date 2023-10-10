@@ -17,3 +17,4 @@ MonoBehaviour:
   - Track01
   isGamePaused: 0
   numberOfLaps: 3
+  cameraChoose: 0

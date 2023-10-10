@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Menus
@@ -13,7 +12,8 @@ namespace Menus
 
         public void Settings()
         {
-            throw new NotImplementedException();
+            gameObject.GetComponentInParent<Canvas>().enabled = false;
+            FindFirstObjectByType<SettingsMenu>().gameObject.GetComponentInParent<Canvas>().enabled = true;
         }
 
         public void QuitGame()
