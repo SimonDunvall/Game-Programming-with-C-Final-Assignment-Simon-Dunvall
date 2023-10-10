@@ -562,7 +562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 30
-  maxTorque: 40
+  maxTorque: 60
   frontLeftWheelTransform: {fileID: 3794951908810334882}
   frontRightWheelTransform: {fileID: 948405438201742482}
   rearLeftWheelTransform: {fileID: 9188640840458259854}

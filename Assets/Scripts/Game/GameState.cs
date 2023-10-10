@@ -27,6 +27,12 @@ namespace Game
             Destroy(gameObject);
         }
 
+        private void LoadGameOver()
+        {
+            GameOverController gameOverPrefab = Resources.Load<GameOverController>("gameOverCanvas");
+            Instantiate(gameOverPrefab);
+        }
+
         private void Awake()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -37,6 +43,7 @@ namespace Game
             if (scene.name == gameSettings.mainMenuSceneName) return;
 
             LoadCars();
+            LoadGameOver();
         }
 
         internal static void LoadMainMenu()
@@ -77,8 +84,8 @@ namespace Game
 
         private static void LoadCars()
         {
-            Instantiate(Resources.Load<CarData>("car_root01"));
-            Instantiate(Resources.Load<CarData>("car_root02"));
+            Instantiate(Resources.Load<CarData>("car_root01")).name = "car1";
+            Instantiate(Resources.Load<CarData>("car_root02")).name = "car2";
         }
     }
 }

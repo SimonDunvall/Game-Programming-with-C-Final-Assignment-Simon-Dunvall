@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Car;
 using Game;
+using Menus;
 using UnityEngine;
 
 namespace Track
@@ -28,10 +29,10 @@ namespace Track
                     cp.carsPassed.Remove(carCollider.GetInstanceID());
                 }
 
-                if (GameState.getNumberOfLaps() <= car.NumberOfLapsCompleted)
-                {
-                    Debug.Log($"{carCollider.transform.parent.name} Won");
-                }
+                if (GameState.getNumberOfLaps() > car.NumberOfLapsCompleted) return;
+
+                GameOverController gameOverInstance = FindObjectOfType<GameOverController>();
+                gameOverInstance.GameWon(carCollider.transform.parent.name);
             }
         }
     }
