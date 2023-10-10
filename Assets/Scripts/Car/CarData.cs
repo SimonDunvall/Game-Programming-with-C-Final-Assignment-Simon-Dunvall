@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace Car
 {
-    public class CarManager : MonoBehaviour
+    public class CarData : MonoBehaviour
     {
         internal int NumberOfLapsCompleted;
     }

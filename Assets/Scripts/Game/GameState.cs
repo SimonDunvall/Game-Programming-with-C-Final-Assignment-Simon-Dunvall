@@ -1,3 +1,4 @@
+using Car;
 using Menus;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,6 +25,19 @@ namespace Game
             }
 
             Destroy(gameObject);
+        }
+
+        private void Awake()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name != gameSettings.mainMenuSceneName)
+            {
+                LoadCars();
+            }
         }
 
         internal static void LoadMainMenu()
@@ -60,6 +74,12 @@ namespace Game
         public static int getNumberOfLaps()
         {
             return gameSettings.numberOfLaps;
+        }
+
+        private static void LoadCars()
+        {
+            Instantiate(Resources.Load<CarData>("car_root01"));
+            Instantiate(Resources.Load<CarData>("car_root02"));
         }
     }
 }

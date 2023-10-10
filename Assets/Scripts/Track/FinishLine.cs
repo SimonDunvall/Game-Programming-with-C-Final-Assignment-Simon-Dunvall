@@ -19,7 +19,7 @@ namespace Track
 
             if (doneCheckPoints.Count() != checkPoints.Count() || !doneCheckPoints.TrueForAll(e => e)) return;
             {
-                CarManager car = carCollider.GetComponentInParent<CarManager>();
+                CarData car = carCollider.GetComponentInParent<CarData>();
                 car.NumberOfLapsCompleted++;
 
                 foreach (GameObject checkPoint in checkPoints)

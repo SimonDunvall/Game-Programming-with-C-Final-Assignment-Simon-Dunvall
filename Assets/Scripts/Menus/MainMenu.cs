@@ -8,6 +8,7 @@ namespace Menus
         public void RunGame()
         {
             GameState.LoadTrack();
+            //GameState.LoadCars();
         }
 
         public void QuitGame()
