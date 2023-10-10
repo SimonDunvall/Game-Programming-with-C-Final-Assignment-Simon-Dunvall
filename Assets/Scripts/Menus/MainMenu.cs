@@ -1,3 +1,4 @@
+using System;
 using Game;
 using UnityEngine;
 
@@ -9,6 +10,11 @@ namespace Menus
         {
             GameState.LoadTrack();
             //GameState.LoadCars();
+        }
+
+        public void Settings()
+        {
+            throw new NotImplementedException();
         }
 
         public void QuitGame()
