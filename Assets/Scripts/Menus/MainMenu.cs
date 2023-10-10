@@ -10,12 +10,6 @@ namespace Menus
             FindFirstObjectByType<TrackMenu>().gameObject.GetComponentInParent<Canvas>().enabled = true;
         }
 
-        public void Settings()
-        {
-            gameObject.GetComponentInParent<Canvas>().enabled = false;
-            FindFirstObjectByType<SettingsMenu>().gameObject.GetComponentInParent<Canvas>().enabled = true;
-        }
-
         public void QuitGame()
         {
 #if UNITY_EDITOR

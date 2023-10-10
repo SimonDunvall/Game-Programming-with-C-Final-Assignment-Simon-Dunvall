@@ -1,4 +1,3 @@
-using System.Linq;
 using Car;
 using Menus;
 using UnityEngine;
@@ -37,10 +36,7 @@ namespace Game
         {
             if (scene.name == gameSettings.mainMenuSceneName) return;
 
-            var isSplitScreen = gameSettings.cameraChoose == 1;
-            Camera.main!.enabled = !isSplitScreen;
-
-            LoadCars(isSplitScreen);
+            LoadCars();
         }
 
         internal static void LoadMainMenu()
@@ -79,20 +75,10 @@ namespace Game
             return gameSettings.numberOfLaps;
         }
 
-        private static void LoadCars(bool withCameraOn)
+        private static void LoadCars()
         {
             Instantiate(Resources.Load<CarData>("car_root01"));
             Instantiate(Resources.Load<CarData>("car_root02"));
-
-            if (!withCameraOn)
-            {
-                Camera.allCameras.ToList().FindAll(c => c.CompareTag("CarCamera")).ForEach(c => c.enabled = false);
-            }
-        }
-
-        public static void chooseCamera(int camera)
-        {
-            gameSettings.cameraChoose = camera;
         }
     }
 }

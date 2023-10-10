@@ -3,12 +3,17 @@ using UnityEngine.InputSystem;
 
 namespace Car
 {
-    public class WheelDrive : MonoBehaviour
+    public class CarController : MonoBehaviour
     {
         public float maxAngle;
         public float maxTorque;
 
-        private WheelCollider[] m_Wheels;
+        private WheelCollider[] wheelsColliders;
+
+        public Transform frontLeftWheelTransform,
+            frontRightWheelTransform,
+            rearLeftWheelTransform,
+            rearRightWheelTransform;
 
         private float angle, torque;
 
@@ -19,7 +24,7 @@ namespace Car
 
         private void Start()
         {
-            m_Wheels = GetComponentsInChildren<WheelCollider>();
+            wheelsColliders = GetComponentsInChildren<WheelCollider>();
         }
 
         private void Awake()
@@ -36,9 +41,9 @@ namespace Car
             accelerationInputAction.canceled += GetTorqueInput;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            foreach (WheelCollider wheel in m_Wheels)
+            foreach (WheelCollider wheel in wheelsColliders)
             {
                 switch (wheel.transform.localPosition.z)
                 {
@@ -50,6 +55,19 @@ namespace Car
                         break;
                 }
             }
+
+
+            UpdateSingleWheel(wheelsColliders[0], frontLeftWheelTransform);
+            UpdateSingleWheel(wheelsColliders[1], frontRightWheelTransform);
+            UpdateSingleWheel(wheelsColliders[2], rearRightWheelTransform);
+            UpdateSingleWheel(wheelsColliders[3], rearLeftWheelTransform);
+        }
+
+        private void UpdateSingleWheel(WheelCollider wheelCollider, Transform wheelTransform)
+        {
+            wheelCollider.GetWorldPose(out var pos, out var rot);
+            wheelTransform.rotation = rot;
+            wheelTransform.position = pos;
         }
 
         private void OnEnable()
