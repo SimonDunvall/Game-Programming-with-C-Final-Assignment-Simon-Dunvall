@@ -10,7 +10,7 @@ namespace Game
         private static GameState instance;
         private static GameSettings gameSettings;
 
-        public void Initialize(GameSettings settings)
+        internal void Initialize(GameSettings settings)
         {
             if (instance == null)
             {
@@ -27,12 +27,6 @@ namespace Game
             Destroy(gameObject);
         }
 
-        private void LoadGameOver()
-        {
-            GameOverController gameOverPrefab = Resources.Load<GameOverController>("gameOverCanvas");
-            Instantiate(gameOverPrefab);
-        }
-
         private void Awake()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -42,13 +36,14 @@ namespace Game
         {
             if (scene.name == gameSettings.mainMenuSceneName) return;
 
-            LoadCars();
             LoadGameOver();
+            LoadCars();
         }
 
-        internal static void LoadMainMenu()
+        private void LoadGameOver()
         {
-            SceneManager.LoadSceneAsync(gameSettings.mainMenuSceneName, LoadSceneMode.Single);
+            GameOverController gameOverPrefab = Resources.Load<GameOverController>("gameOverCanvas");
+            Instantiate(gameOverPrefab);
         }
 
         private static void LoadPauseMenu()
@@ -58,28 +53,28 @@ namespace Game
             pauseMenuController.Initialize(gameSettings);
         }
 
+        internal static void LoadMainMenu()
+        {
+            SceneManager.LoadSceneAsync(gameSettings.mainMenuSceneName, LoadSceneMode.Single);
+        }
+
         internal static void LoadTrack(int trackNumber)
         {
             SceneManager.LoadSceneAsync(gameSettings.tracksName[trackNumber], LoadSceneMode.Single);
         }
 
-        public static void pauseGame(Canvas canvas)
+        internal static void pauseGame(Canvas canvas)
         {
             gameSettings.isGamePaused = true;
             canvas.enabled = true;
             Time.timeScale = 0;
         }
 
-        public static void unPauseGame(Canvas canvas)
+        internal static void unPauseGame(Canvas canvas)
         {
             gameSettings.isGamePaused = false;
             canvas.enabled = false;
             Time.timeScale = 1;
-        }
-
-        public static int getNumberOfLaps()
-        {
-            return gameSettings.numberOfLaps;
         }
 
         private static void LoadCars()

@@ -29,7 +29,8 @@ namespace Track
                     cp.carsPassed.Remove(carCollider.GetInstanceID());
                 }
 
-                if (GameState.getNumberOfLaps() > car.NumberOfLapsCompleted) return;
+                GameSettings gameSettings = ScriptableObject.CreateInstance<GameSettings>();
+                if (gameSettings.getNumberOfLaps() > car.NumberOfLapsCompleted) return;
 
                 GameOverController gameOverInstance = FindObjectOfType<GameOverController>();
                 gameOverInstance.GameWon(carCollider.transform.parent.name);
