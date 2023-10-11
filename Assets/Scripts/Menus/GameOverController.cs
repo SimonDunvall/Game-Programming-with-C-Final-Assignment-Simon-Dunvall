@@ -10,9 +10,14 @@ namespace Menus
 
         public void GameWon(string carName)
         {
-            GameState.pauseGame(GetComponent<Canvas>());
+            GameState.pauseGame(GetCanvas());
 
             winner.text = $"The winner is {carName}";
+        }
+
+        internal static Canvas GetCanvas()
+        {
+            return FindObjectOfType<GameOverController>().GetComponent<Canvas>();
         }
     }
 }

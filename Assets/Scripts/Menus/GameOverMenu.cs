@@ -7,6 +7,7 @@ namespace Menus
     {
         public void ToMainMenu()
         {
+            GameState.unPauseGame(GameOverController.GetCanvas());
             GameState.LoadMainMenu();
         }
     }

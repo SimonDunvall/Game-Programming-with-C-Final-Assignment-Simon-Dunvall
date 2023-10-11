@@ -15,5 +15,6 @@ MonoBehaviour:
   mainMenuSceneName: MainMenu
   tracksName:
   - Track01
+  - Track02
   isGamePaused: 0
   numberOfLaps: 1
