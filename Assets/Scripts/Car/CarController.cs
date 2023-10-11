@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,19 +6,20 @@ namespace Car
 {
     public class CarController : MonoBehaviour
     {
-        public float maxAngle;
-        public float maxTorque;
+        [SerializeField] private float maxAngle;
+        [SerializeField] private float maxTorque;
 
         private WheelCollider[] wheelsColliders;
+        private Transform[] wheelsTransforms;
 
-        public Transform frontLeftWheelTransform,
+        [SerializeField] private Transform frontLeftWheelTransform,
             frontRightWheelTransform,
             rearLeftWheelTransform,
             rearRightWheelTransform;
 
         private float angle, torque;
 
-        public InputActionAsset primaryActions;
+        [SerializeField] private InputActionAsset primaryActions;
         private InputActionMap gameplayActionMap;
         private InputAction steeringAngleInputAction;
         private InputAction accelerationInputAction;
@@ -25,6 +27,13 @@ namespace Car
         private void Start()
         {
             wheelsColliders = GetComponentsInChildren<WheelCollider>();
+            wheelsTransforms = new[]
+            {
+                frontLeftWheelTransform,
+                frontRightWheelTransform,
+                rearLeftWheelTransform,
+                rearRightWheelTransform
+            };
         }
 
         private void Awake()
@@ -56,11 +65,10 @@ namespace Car
                 }
             }
 
-
-            UpdateSingleWheel(wheelsColliders[0], frontLeftWheelTransform);
-            UpdateSingleWheel(wheelsColliders[1], frontRightWheelTransform);
-            UpdateSingleWheel(wheelsColliders[2], rearRightWheelTransform);
-            UpdateSingleWheel(wheelsColliders[3], rearLeftWheelTransform);
+            for (int i = 0; i < wheelsColliders.Count(); i++)
+            {
+                UpdateSingleWheel(wheelsColliders[i], wheelsTransforms[i]);
+            }
         }
 
         private void UpdateSingleWheel(WheelCollider wheelCollider, Transform wheelTransform)
