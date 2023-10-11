@@ -24,7 +24,7 @@ namespace Menus
             Destroy(gameObject);
         }
 
-        public InputActionAsset primaryActions;
+        [SerializeField] private InputActionAsset primaryActions;
         private InputActionMap pauseMenuActionMap;
         private InputAction pauseMenuInputAction;
 
@@ -50,7 +50,8 @@ namespace Menus
         private void PauseGame(InputAction.CallbackContext context)
         {
             if (SceneManager.GetActiveScene().name == gameSettings.mainMenuSceneName) return;
-            Canvas canvas = instance.GetComponent<Canvas>();
+            Canvas canvas = UiController.GetCanvas(instance.gameObject);
+
             if (!gameSettings.isGamePaused)
             {
                 GameState.pauseGame(canvas);

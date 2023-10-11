@@ -6,8 +6,8 @@ namespace Menus
     {
         public void RunGame()
         {
-            gameObject.GetComponentInParent<Canvas>().enabled = false;
-            FindFirstObjectByType<TrackMenu>().gameObject.GetComponentInParent<Canvas>().enabled = true;
+            UiController.TurnOfParentCanvasForGameObject(gameObject);
+            UiController.TurnOnParentCanvasForGameObject(FindFirstObjectByType<TrackMenu>().gameObject);
         }
 
         public void QuitGame()

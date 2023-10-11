@@ -7,14 +7,14 @@ namespace Menus
     {
         public void MainMenu()
         {
-            Canvas canvas = gameObject.GetComponentInParent<Canvas>();
+            Canvas canvas = UiController.GetParentCanvasFromGameObject(gameObject);
             GameState.unPauseGame(canvas);
             GameState.LoadMainMenu();
         }
 
         public void ResumeGame()
         {
-            Canvas canvas = gameObject.GetComponentInParent<Canvas>();
+            Canvas canvas = UiController.GetParentCanvasFromGameObject(gameObject);
             GameState.unPauseGame(canvas);
         }
     }

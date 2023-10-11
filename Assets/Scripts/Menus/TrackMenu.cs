@@ -5,7 +5,7 @@ namespace Menus
 {
     public class TrackMenu : MonoBehaviour
     {
-        public int trackNumber;
+        [SerializeField] private int trackNumber;
 
         public void ChooseTrack()
         {
