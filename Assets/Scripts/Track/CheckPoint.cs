@@ -5,7 +5,7 @@ namespace Track
 {
     public class CheckPoint : MonoBehaviour
     {
-        public List<int> carsPassed = new List<int>();
+        internal readonly List<int> carsPassed = new List<int>();
 
         private void OnTriggerEnter(Collider carCollider)
         {

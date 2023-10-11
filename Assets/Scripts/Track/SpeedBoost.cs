@@ -4,7 +4,7 @@ namespace Track
 {
     public class SpeedBoost : MonoBehaviour
     {
-        public int BoostAmount;
+        [SerializeField] private int BoostAmount;
 
         private void OnTriggerEnter(Collider carCollider)
         {

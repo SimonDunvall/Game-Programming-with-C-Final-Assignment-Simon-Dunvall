@@ -36,14 +36,13 @@ namespace Game
         {
             if (scene.name == gameSettings.mainMenuSceneName) return;
 
-            LoadGameOver();
             LoadCars();
         }
 
-        private void LoadGameOver()
+        internal static GameOverController LoadGameOver()
         {
             GameOverController gameOverPrefab = Resources.Load<GameOverController>("gameOverCanvas");
-            Instantiate(gameOverPrefab);
+            return Instantiate(gameOverPrefab);
         }
 
         private static void LoadPauseMenu()

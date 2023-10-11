@@ -4,7 +4,7 @@ namespace Track
 {
     public class SpeedDecrease : MonoBehaviour
     {
-        public float DecreaseDragAmount;
+        [SerializeField] private float DecreaseDragAmount;
         private float originalDrag;
 
         private void OnTriggerEnter(Collider carCollider)

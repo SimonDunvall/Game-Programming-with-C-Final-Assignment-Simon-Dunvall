@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Car;
 using Game;
-using Menus;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Track
@@ -11,30 +12,50 @@ namespace Track
     {
         private void OnTriggerEnter(Collider carCollider)
         {
-            GameObject[] checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
-            List<bool> doneCheckPoints = (from checkPoint in checkPoints
-                select checkPoint.GetComponent<CheckPoint>()
-                into cp
-                where cp.carsPassed.Contains(carCollider.GetInstanceID())
-                select true).ToList();
+            GameObject[] allCheckPoints = GetCheckPoints();
+            bool[] passedCheckPoints = GetPassedCheckPoint(allCheckPoints, carCollider);
 
-            if (doneCheckPoints.Count() != checkPoints.Count() || !doneCheckPoints.TrueForAll(e => e)) return;
+            if (passedCheckPoints.Count() < allCheckPoints.Count() ||
+                !Array.TrueForAll(passedCheckPoints, b => b)) return;
+
+            CarData car = CarData.GetCar(carCollider);
+            car.NumberOfLapsCompleted++;
+
+            RemoveCarFromCheckPoints(allCheckPoints, carCollider);
+
+            GameSettings gameSettings = ScriptableObject.CreateInstance<GameSettings>();
+            if (gameSettings.getNumberOfLaps() > car.NumberOfLapsCompleted) return;
+
+            GameState.LoadGameOver().GameWon(carCollider.transform.parent.name);
+        }
+
+        private void RemoveCarFromCheckPoints(IEnumerable<GameObject> checkPoints, [NotNull] Collider carCollider)
+        {
+            if (carCollider == null) throw new ArgumentNullException(nameof(carCollider));
+            foreach (GameObject checkPoint in checkPoints)
             {
-                CarData car = carCollider.GetComponentInParent<CarData>();
-                car.NumberOfLapsCompleted++;
-
-                foreach (GameObject checkPoint in checkPoints)
-                {
-                    CheckPoint cp = checkPoint.GetComponent<CheckPoint>();
-                    cp.carsPassed.Remove(carCollider.GetInstanceID());
-                }
-
-                GameSettings gameSettings = ScriptableObject.CreateInstance<GameSettings>();
-                if (gameSettings.getNumberOfLaps() > car.NumberOfLapsCompleted) return;
-
-                GameOverController gameOverInstance = FindObjectOfType<GameOverController>();
-                gameOverInstance.GameWon(carCollider.transform.parent.name);
+                GetCheckPoint(checkPoint).carsPassed.Remove(carCollider.GetInstanceID());
             }
+        }
+
+        private CheckPoint GetCheckPoint(GameObject checkPoint)
+        {
+            return checkPoint.GetComponent<CheckPoint>();
+        }
+
+        private bool[] GetPassedCheckPoint(IEnumerable<GameObject> allCheckPoints, [NotNull] Collider col)
+        {
+            if (col == null) throw new ArgumentNullException(nameof(col));
+            return (from checkPoint in allCheckPoints
+                select GetCheckPoint(checkPoint)
+                into cp
+                where cp.carsPassed.Contains(col.GetInstanceID())
+                select true).ToArray();
+        }
+
+        private GameObject[] GetCheckPoints()
+        {
+            return GameObject.FindGameObjectsWithTag("CheckPoint");
         }
     }
 }

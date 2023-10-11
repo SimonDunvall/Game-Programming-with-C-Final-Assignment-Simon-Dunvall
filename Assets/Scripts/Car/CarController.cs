@@ -73,7 +73,7 @@ namespace Car
 
         private void UpdateSingleWheel(WheelCollider wheelCollider, Transform wheelTransform)
         {
-            wheelCollider.GetWorldPose(out var pos, out var rot);
+            wheelCollider.GetWorldPose(out Vector3 pos, out Quaternion rot);
             wheelTransform.rotation = rot;
             wheelTransform.position = pos;
         }
