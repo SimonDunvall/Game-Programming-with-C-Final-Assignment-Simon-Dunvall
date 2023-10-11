@@ -16,5 +16,6 @@ MonoBehaviour:
   tracksName:
   - Track01
   - Track02
+  - Track03
   isGamePaused: 0
   numberOfLaps: 1

@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Track02.unity
     guid: 7d4ff063568f349d5b8120b0eb2ffc94
+  - enabled: 1
+    path: Assets/Scenes/Track03.unity
+    guid: 09a3b3eb6cba542a1b61b1e6bdb8a85b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 07b8b2e0341bf4cefb46feca23e9f6c8, type: 2}
