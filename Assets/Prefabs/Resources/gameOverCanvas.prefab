@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 8511826475017570787}
   - component: {fileID: 8156822882251807454}
   - component: {fileID: 3358485153398507346}
+  - component: {fileID: 8612966559998624195}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -505,9 +506,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2867241995004501406}
-        m_TargetAssemblyTypeName: Menus.PauseMenu, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 8612966559998624195}
+        m_TargetAssemblyTypeName: Menus.GameOverMenu, Assembly-CSharp
+        m_MethodName: ToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -517,6 +518,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8612966559998624195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2867241995004501406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 414ed9144264750408f5616d06aeb52c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8709324364089901122
 GameObject:
   m_ObjectHideFlags: 0
